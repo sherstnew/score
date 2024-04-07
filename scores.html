@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scores.css">
+    <script src="scores.js" defer></script>
+    <title>Scores</title>
+</head>
+<body>
+    <form class="scores">
+        <header class="header">Матч</header>
+        <div class="teams">
+            <div class="team team_a">
+                <header class="team_header">Команда А</header>
+                <input type="text" placeholder="Название команды А" class="input" id="name_a" required value="Академия">
+                <div class="team_block">
+                    <label for="point_a">Очки</label>
+                    <input type="number" id="point_a" class="input input_point" placeholder="Очки" value="0">
+                    <button class="btn btn_add" id="point_a_add">+</button>
+                    <button class="btn btn_remove" id="point_a_remove">-</button>
+                </div>
+                <div class="team_block">
+                    <label for="set_a">Партии</label>
+                    <input type="number" id="set_a" class="input input_set" placeholder="Партии" value="0">
+                    <button class="btn btn_add" id="set_a_add">+</button>
+                    <button class="btn btn_remove" id="set_a_remove">-</button>
+                </div>
+            </div>
+            <div class="team team_b">
+                <header class="team_header">Команда Б</header>
+                <input type="text" placeholder="Название команды Б" class="input" id="name_b" required>
+                <div class="team_block">
+                    <label for="point_b">Очки</label>
+                    <input type="number" id="point_b" class="input input_point" placeholder="Очки" value="0">
+                    <button class="btn btn_add" id="point_b_add">+</button>
+                    <button class="btn btn_remove" id="point_b_remove">-</button>
+                </div>
+                <div class="team_block">
+                    <label for="set_b">Партии</label>
+                    <input type="number" id="set_b" class="input input_set" placeholder="Партии" value="0">
+                    <button class="btn btn_add" id="set_b_add">+</button>
+                    <button class="btn btn_remove" id="set_b_remove">-</button>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Сохранить" class="btn btn_submit">
+        <div class="btn btn_clear" id="reset_btn">Очистить очки</div>
+    </form>
+</body>
+</html>
