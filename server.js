@@ -16,4 +16,8 @@ webSocketServer.on('connection', ws => {
    ws.on("error", e => ws.send(e));
 });
 
+app.get('/', (req, res) => {
+   res.send('200');
+});
+
 server.listen(8999, () => console.log("Server started"))
