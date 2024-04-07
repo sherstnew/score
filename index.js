@@ -6,7 +6,7 @@ const set_b_node = document.querySelector('#set_b');
 const point_a_node = document.querySelector('#point_a');
 const point_b_node = document.querySelector('#point_b');
 
-let socket = new WebSocket("ws://192.168.0.166:8999/");
+let socket = new WebSocket("wss://score-yigf.onrender.com/");
 
 socket.onmessage = function(event) {
     const { set_a, set_b, point_a, point_b, name_a, name_b } = JSON.parse(event.data);

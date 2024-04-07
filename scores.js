@@ -20,33 +20,36 @@ const name_b_input = document.querySelector('#name_b');
 
 const reset_btn = document.querySelector('#reset_btn');
 
-const socket = new WebSocket("ws://192.168.0.166:8999/");
+const socket = new WebSocket("wss://score-yigf.onrender.com/");
 
-const send_scores = () => {
-    const scores = {
-        set_a: set_a_input.value,
-        set_b: set_b_input.value,
-        point_a: point_a_input.value,
-        point_b: point_b_input.value,
-        name_a: name_a_input.value,
-        name_b: name_b_input.value,
-    }
-
-    socket.send(JSON.stringify(scores));
+socket.onopen = () => {
+    const send_scores = () => {
+        const scores = {
+            set_a: set_a_input.value,
+            set_b: set_b_input.value,
+            point_a: point_a_input.value,
+            point_b: point_b_input.value,
+            name_a: name_a_input.value,
+            name_b: name_b_input.value,
+        }
+    
+        socket.send(JSON.stringify(scores));
+    };
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        send_scores();
+    });
+    
+    reset_btn.addEventListener('click', (e) => {
+        // set_a_input.value = 0;
+        // set_b_input.value = 0;
+        point_a_input.value = 0;
+        point_b_input.value = 0;
+        send_scores();
+    });
 };
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    send_scores();
-});
-
-reset_btn.addEventListener('click', (e) => {
-    // set_a_input.value = 0;
-    // set_b_input.value = 0;
-    point_a_input.value = 0;
-    point_b_input.value = 0;
-    send_scores();
-});
 
 set_a_add.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) + 1});
 set_a_remove.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) - 1});
