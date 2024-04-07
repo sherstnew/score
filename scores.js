@@ -18,12 +18,19 @@ const point_b_remove = document.querySelector('#point_b_remove');
 const name_a_input = document.querySelector('#name_a');
 const name_b_input = document.querySelector('#name_b');
 
+const logo_a_input = document.querySelector('#logo_a');
+const logo_b_input = document.querySelector('#logo_b');
+
+const submit_btn = document.querySelector('#submit_btn');
 const reset_btn = document.querySelector('#reset_btn');
 
 const socket = new WebSocket("wss://score-yigf.onrender.com/");
 
 socket.onopen = () => {
     const send_scores = () => {
+
+        submit_btn.style.color = "rgba(255, 255, 255, .5)";
+
         const scores = {
             set_a: set_a_input.value,
             set_b: set_b_input.value,
@@ -31,9 +38,15 @@ socket.onopen = () => {
             point_b: point_b_input.value,
             name_a: name_a_input.value,
             name_b: name_b_input.value,
+            logo_a: logo_a_input.value,
+            logo_b: logo_b_input.value,
         }
     
         socket.send(JSON.stringify(scores));
+
+        setTimeout(() => {
+            submit_btn.style.color = "#ffffff";
+        }, 500);
     };
     
     form.addEventListener('submit', (e) => {
