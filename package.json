@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/sherstnew/score#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "ws": "^8.16.0"
   }
 }
