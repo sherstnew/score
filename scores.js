@@ -24,6 +24,8 @@ const logo_b_input = document.querySelector('#logo_b');
 const submit_btn = document.querySelector('#submit_btn');
 const reset_btn = document.querySelector('#reset_btn');
 
+const gameid_input = document.querySelector('#gameid');
+
 const socket = new WebSocket("wss://score-yigf.onrender.com/");
 
 socket.onopen = () => {
@@ -32,6 +34,7 @@ socket.onopen = () => {
         submit_btn.style.color = "rgba(255, 255, 255, .5)";
 
         const scores = {
+            gameid: gameid_input.value,
             set_a: set_a_input.value,
             set_b: set_b_input.value,
             point_a: point_a_input.value,
@@ -41,19 +44,19 @@ socket.onopen = () => {
             logo_a: logo_a_input.value,
             logo_b: logo_b_input.value,
         }
-    
+
         socket.send(JSON.stringify(scores));
 
         setTimeout(() => {
             submit_btn.style.color = "#ffffff";
         }, 500);
     };
-    
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         send_scores();
     });
-    
+
     reset_btn.addEventListener('click', (e) => {
         // set_a_input.value = 0;
         // set_b_input.value = 0;
