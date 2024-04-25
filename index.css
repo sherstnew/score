@@ -3,6 +3,28 @@
   src: url('./fonts/TTNormsPro-Medium.ttf');
 }
 
+@keyframes showTimeout {
+  0% {
+    position: relative;
+    right: 300px;
+  }
+  100% {
+    position: relative;
+    right: 0px;
+  }
+}
+
+@keyframes hideTimeout {
+  0% {
+    position: relative;
+    right: 0px;
+  }
+  100% {
+    position: relative;
+    right: 300px;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +35,8 @@ body {
   display: flex;
   justify-content: center;
   color: #fff;
-  background-color: #000;
+  background-color: #555555;
+  gap: 20px;
 }
 
 .score {
@@ -93,6 +116,7 @@ body {
   flex-wrap: wrap;
   gap: 20%;
   height: 100%;
+  color: #7abfff;
 }
 
 .set {
@@ -113,4 +137,53 @@ body {
 .point {
   text-align: left;
   width: 50px;
+}
+
+.indicators {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 30%;
+  width: 50px;
+  height: 100%;
+}
+
+.indicator {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #7a7cff, #7abfff);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.timeouts {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 200px;
+  gap: 20%;
+  font-size: 32px;
+}
+
+.timeout {
+  position: relative;
+  right: 300px;
+  text-align: center;
+  width: 100%;
+  background: linear-gradient(135deg, #7a7cff, #7abfff);
+  border-radius: 15px;
+  padding: 10px;
+  z-index: -1;
+}
+
+.timeout-visible {
+  animation: showTimeout .5s 1 forwards;
+}
+
+.timeout-hidden {
+  animation: hideTimeout .5s 1 forwards;
 }

@@ -9,6 +9,12 @@ const point_b_node = document.querySelector('#point_b');
 const logo_a_node = document.querySelector('#logo_a');
 const logo_b_node = document.querySelector('#logo_b');
 
+const indicator_a_node = document.querySelector('#indicator_a');
+const indicator_b_node = document.querySelector('#indicator_b');
+
+const timeout_a_node = document.querySelector('#timeout_a');
+const timeout_b_node = document.querySelector('#timeout_b');
+
 let socket = new WebSocket("wss://score-yigf.onrender.com/");
 
 let params = new URL(document.location).searchParams;
@@ -19,7 +25,11 @@ if (!gameid_param) {
 }
 
 socket.onmessage = function(event) {
-    const { gameid, set_a, set_b, point_a, point_b, name_a, name_b, logo_a, logo_b } = JSON.parse(event.data);
+
+    const current_points_a = Number(point_a_node.innerHTML);
+    const current_points_b = Number(point_b_node.innerHTML);
+
+    const { gameid, set_a, set_b, point_a, point_b, name_a, name_b, logo_a, logo_b, timeout_a, timeout_b } = JSON.parse(event.data);
     if (gameid === gameid_param) {
       set_a_node.innerHTML = set_a;
       set_b_node.innerHTML = set_b;
@@ -29,6 +39,41 @@ socket.onmessage = function(event) {
       name_b_node.innerHTML = name_b;
       logo_a_node.src = './images/teamlogos/' + logo_a;
       logo_b_node.src = './images/teamlogos/' + logo_b;
+
+      if (timeout_a) {
+        if (timeout_a_node.classList.contains("timeout-hidden")) {
+          timeout_a_node.classList.add("timeout-visible");
+          timeout_a_node.classList.remove("timeout-hidden");
+        }
+      } else {
+        if (timeout_a_node.classList.contains("timeout-visible")) {
+          timeout_a_node.classList.add("timeout-hidden");
+          timeout_a_node.classList.remove("timeout-visible");
+        }
+      }
+      if (timeout_b) {
+        if (timeout_b_node.classList.contains("timeout-hidden")) {
+          timeout_b_node.classList.add("timeout-visible");
+          timeout_b_node.classList.remove("timeout-hidden");
+        }
+      } else {
+        if (timeout_b_node.classList.contains("timeout-visible")) {
+          timeout_b_node.classList.add("timeout-hidden");
+          timeout_b_node.classList.remove("timeout-visible");
+        }
+      }
+
+      if (point_a > current_points_a) {
+        indicator_a_node.style.opacity = 1;
+      } else if (!(point_a <= current_points_a && point_b <= current_points_b)) {
+        indicator_a_node.style.opacity = 0;
+      }
+
+      if (point_b > current_points_b) {
+        indicator_b_node.style.opacity = 1;
+      } else if (!(point_a <= current_points_a && point_b <= current_points_b)) {
+        indicator_b_node.style.opacity = 0;
+      }
     }
 };
 

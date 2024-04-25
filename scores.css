@@ -109,3 +109,13 @@
 #gameid {
     width: 100px;
 }
+
+.timeout {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}

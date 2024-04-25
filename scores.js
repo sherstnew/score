@@ -26,6 +26,9 @@ const reset_btn = document.querySelector('#reset_btn');
 
 const gameid_input = document.querySelector('#gameid');
 
+const timeout_a_checkbox = document.querySelector('#timeout_a');
+const timeout_b_checkbox = document.querySelector('#timeout_b');
+
 const socket = new WebSocket("wss://score-yigf.onrender.com/");
 
 socket.onopen = () => {
@@ -43,6 +46,8 @@ socket.onopen = () => {
             name_b: name_b_input.value,
             logo_a: logo_a_input.value,
             logo_b: logo_b_input.value,
+            timeout_a: timeout_a_checkbox.checked,
+            timeout_b: timeout_b_checkbox.checked,
         }
 
         socket.send(JSON.stringify(scores));
@@ -51,6 +56,13 @@ socket.onopen = () => {
             submit_btn.style.color = "#ffffff";
         }, 500);
     };
+
+    timeout_a_checkbox.addEventListener('change', (evt) => {
+        send_scores();
+    });
+    timeout_b_checkbox.addEventListener('change', (evt) => {
+        send_scores();
+    });
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -65,7 +77,6 @@ socket.onopen = () => {
         send_scores();
     });
 };
-
 
 set_a_add.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) + 1});
 set_a_remove.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) - 1});
