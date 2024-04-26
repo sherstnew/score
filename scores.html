@@ -11,6 +11,13 @@
     <form class="scores">
         <header class="header">Матч</header>
         <input type="number" class="input" placeholder="ID Матча" id="gameid" required>
+        <div class="sets_scores">
+            <input type="text" class="set_score input" placeholder="1 партия">
+            <input type="text" class="set_score input" placeholder="2 партия">
+            <input type="text" class="set_score input" placeholder="3 партия">
+            <input type="text" class="set_score input" placeholder="4 партия">
+            <input type="text" class="set_score input" placeholder="5 партия">
+        </div>
         <div class="teams">
             <div class="team team_a">
                 <header class="team_header">Команда А</header>
@@ -56,7 +63,7 @@
             </div>
         </div>
         <input type="submit" value="Сохранить" class="btn btn_submit" id="submit_btn">
-        <div class="btn btn_clear" id="reset_btn">Очистить очки</div>
+        <div class="btn btn_clear" id="reset_btn">Новая партия</div>
     </form>
 </body>
 </html>

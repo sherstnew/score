@@ -119,3 +119,15 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
 }
+
+.sets_scores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.set_score {
+    width: 100px;
+}
