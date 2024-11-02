@@ -31,7 +31,7 @@ const timeout_b_checkbox = document.querySelector('#timeout_b');
 
 const sets_scores = document.querySelectorAll(".set_score");
 
-const socket = new WebSocket("ws://kasik.skfxteam.ru/score/api/");
+const socket = new WebSocket("wss://kasik.skfxteam.ru/score/api/");
 
 socket.onopen = () => {
     const send_scores = () => {
