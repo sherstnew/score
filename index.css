@@ -32,6 +32,7 @@ body {
   width: 82%;
   height: 30%;
   overflow: visible;
+  padding: 10px;
 }
 
 .pfvlogo {
