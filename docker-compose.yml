@@ -1,0 +1,7 @@
+services:
+  tablo-server:
+    build: .
+    container_name: tablo-server
+    restart: unless-stopped
+    ports:
+      - "1105:1105"
