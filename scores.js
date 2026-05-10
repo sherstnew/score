@@ -33,7 +33,7 @@ const timeout_b_checkbox = document.querySelector('#timeout_b');
 
 const sets_scores = document.querySelectorAll(".set_score");
 
-const socket = new WebSocket("wss://score-yigf.onrender.com");
+const socket = new WebSocket("wss://tablo.sherstd.ru");
 let send_scores = () => {};
 
 const normalize_point_input = (input) => {
