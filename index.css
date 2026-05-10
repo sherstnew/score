@@ -16,6 +16,8 @@ body {
   overflow: hidden;
   color: #fff;
   background-color: #bbbbbb;
+  display: flex;
+  flex-direction: column;
 }
 
 .scoreboard {
@@ -240,14 +242,11 @@ body {
 }
 
 .tablo {
-  position: absolute;
-  top: calc(30% - .70vh);
-  left: 34%;
+  position: relative;
+  left: 30%;
   display: flex;
   align-items: center;
   gap: .4vw;
-  min-height: 7%;
-  padding: 0 .35vw .25vh;
   overflow: visible;
   background-color: transparent;
   border-radius: 0 0 8px 8px;
