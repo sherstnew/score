@@ -17,7 +17,7 @@ const timeout_b_node = document.querySelector('#timeout_b');
 
 const tablo = document.querySelector('.tablo');
 
-let socket = new WebSocket("wss://tablo.sherstd.ru");
+let socket = new WebSocket("wss://tablo.sherstd.ru/api");
 
 let params = new URL(document.location).searchParams;
 let gameid_param = params.get("gameid");
