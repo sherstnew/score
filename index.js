@@ -26,6 +26,18 @@ if (!gameid_param) {
   gameid_param = "1"
 }
 
+const append_score_set = (score, isCurrent = false) => {
+  const newSet = document.createElement('div');
+  newSet.classList.add("score_set");
+
+  if (isCurrent) {
+    newSet.classList.add("score_set_current");
+  }
+
+  newSet.innerHTML = score;
+  tablo.append(newSet);
+};
+
 socket.onmessage = function(event) {
 
     const current_points_a = Number(point_a_node.innerHTML);
@@ -80,19 +92,19 @@ socket.onmessage = function(event) {
       while (tablo.lastChild) {
         tablo.removeChild(tablo.lastChild);
       };
+
+      const currentSetScore = `${point_a_node.innerHTML}:${point_b_node.innerHTML}`;
       
       if (sets.length > 0) {
         sets.forEach(set => {
-          const newSet = document.createElement('div');
-          newSet.classList.add("score_set");
-          newSet.innerHTML = set;
-          tablo.append(newSet);
+          append_score_set(set);
         });
+
+        if (sets[sets.length - 1] !== currentSetScore) {
+          append_score_set(currentSetScore, true);
+        }
       } else {
-        const newSet = document.createElement('div');
-        newSet.classList.add("score_set");
-        newSet.innerHTML = `${point_a_node.innerHTML}:${point_b_node.innerHTML}`;
-        tablo.append(newSet);
+        append_score_set(currentSetScore, true);
       }
     }
 };

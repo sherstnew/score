@@ -20,6 +20,8 @@ const name_b_input = document.querySelector('#name_b');
 
 const logo_a_input = document.querySelector('#logo_a');
 const logo_b_input = document.querySelector('#logo_b');
+const logo_a_preview = document.querySelector('#logo_a_preview');
+const logo_b_preview = document.querySelector('#logo_b_preview');
 
 const submit_btn = document.querySelector('#submit_btn');
 const reset_btn = document.querySelector('#reset_btn');
@@ -32,17 +34,44 @@ const timeout_b_checkbox = document.querySelector('#timeout_b');
 const sets_scores = document.querySelectorAll(".set_score");
 
 const socket = new WebSocket("wss://score-yigf.onrender.com");
+let send_scores = () => {};
+
+const normalize_point_input = (input) => {
+    input.value = Math.max(0, Number(input.value) || 0);
+};
+
+const update_logo_preview = (select, preview) => {
+    preview.src = './images/teamlogos/' + select.value;
+};
+
+update_logo_preview(logo_a_input, logo_a_preview);
+update_logo_preview(logo_b_input, logo_b_preview);
+
+logo_a_input.addEventListener('change', () => {
+    update_logo_preview(logo_a_input, logo_a_preview);
+});
+
+logo_b_input.addEventListener('change', () => {
+    update_logo_preview(logo_b_input, logo_b_preview);
+});
 
 socket.onopen = () => {
-    const send_scores = () => {
+    send_scores = () => {
 
         submit_btn.style.color = "rgba(255, 255, 255, .5)";
 
         let sets = [];
 
+        normalize_point_input(point_a_input);
+        normalize_point_input(point_b_input);
+
         sets_scores.forEach(set => {
-            if (set.value != "0:0" && set.value) {
-                sets.push(set.value)
+            const parts = set.querySelectorAll('.set_score_part');
+            const score_a = parts[0].value;
+            const score_b = parts[1].value;
+
+            if (score_a && score_b && `${score_a}:${score_b}` != "0:0") {
+                sets.push(`${score_a}:${score_b}`)
             }
         })
 
@@ -85,14 +114,45 @@ socket.onopen = () => {
         point_b_input.value = 0;
         send_scores();
     });
+
+    reset_btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            reset_btn.click();
+        }
+    });
 };
 
-set_a_add.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) + 1});
-set_a_remove.addEventListener('click', (e) => {set_a_input.value = Number(set_a_input.value) - 1});
-point_a_add.addEventListener('click', (e) => {point_a_input.value = Number(point_a_input.value) + 1});
-point_a_remove.addEventListener('click', (e) => {point_a_input.value = Number(point_a_input.value) - 1});
+set_a_add.addEventListener('click', (e) => {
+    set_a_input.value = Number(set_a_input.value) + 1;
+    send_scores();
+});
+set_a_remove.addEventListener('click', (e) => {
+    set_a_input.value = Number(set_a_input.value) - 1;
+    send_scores();
+});
+point_a_add.addEventListener('click', (e) => {
+    point_a_input.value = Number(point_a_input.value) + 1;
+    send_scores();
+});
+point_a_remove.addEventListener('click', (e) => {
+    point_a_input.value = Math.max(0, Number(point_a_input.value) - 1);
+    send_scores();
+});
 
-set_b_add.addEventListener('click', (e) => {set_b_input.value = Number(set_b_input.value) + 1});
-set_b_remove.addEventListener('click', (e) => {set_b_input.value = Number(set_b_input.value) - 1});
-point_b_add.addEventListener('click', (e) => {point_b_input.value = Number(point_b_input.value) + 1});
-point_b_remove.addEventListener('click', (e) => {point_b_input.value = Number(point_b_input.value) - 1});
+set_b_add.addEventListener('click', (e) => {
+    set_b_input.value = Number(set_b_input.value) + 1;
+    send_scores();
+});
+set_b_remove.addEventListener('click', (e) => {
+    set_b_input.value = Number(set_b_input.value) - 1;
+    send_scores();
+});
+point_b_add.addEventListener('click', (e) => {
+    point_b_input.value = Number(point_b_input.value) + 1;
+    send_scores();
+});
+point_b_remove.addEventListener('click', (e) => {
+    point_b_input.value = Math.max(0, Number(point_b_input.value) - 1);
+    send_scores();
+});
